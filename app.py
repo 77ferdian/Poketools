@@ -13,6 +13,7 @@ from visualizations import (
     create_comparison_bar_chart, create_comparison_radar_chart,
     create_team_coverage_heatmap
 )
+from chatbot import render_pokechat_page
 
 # ==================== PAGE CONFIG ====================
 st.set_page_config(
@@ -239,6 +240,73 @@ st.markdown("""<style>
     
     /* Hide deploy button, but keep header toggle button and main menu */
     .stDeployButton {visibility: hidden;}
+
+    /* ==================== POKECHAT STYLES ==================== */
+    .chat-welcome {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .chat-msg-user {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+    }
+
+    .chat-msg-bot {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 16px;
+    }
+
+    .chat-bubble-user {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: #f8fafc;
+        padding: 14px 20px;
+        border-radius: 18px 18px 4px 18px;
+        max-width: 75%;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        word-wrap: break-word;
+    }
+
+    .chat-bubble-bot {
+        background: rgba(39, 39, 42, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: #e2e8f0;
+        padding: 14px 20px;
+        border-radius: 18px 18px 18px 4px;
+        max-width: 80%;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-left: 4px solid #8b5cf6;
+        word-wrap: break-word;
+    }
+
+    .chat-sender-user {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+    }
+
+    .chat-sender-bot {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #818cf8, #c084fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -258,7 +326,8 @@ with st.sidebar:
         "Battle Arena": ":material/swords:",
         "Type Calculator": ":material/calculate:",
         "Team Builder": ":material/groups:",
-        "Move Browser": ":material/menu_book:"
+        "Move Browser": ":material/menu_book:",
+        "PokéChat": ":material/chat:"
     }
     
     for page, icon in pages_config.items():
@@ -1177,7 +1246,7 @@ elif selected == "Team Builder":
                 st.markdown(f"• Gaps: {gaps_str}")
 
 # ==================== PAGE 5: MOVE BROWSER ====================
-else:  # "Move Browser"
+elif selected == "Move Browser":
     st.markdown("<div class='header-title'><h2><i class='fa-solid fa-book'></i> Pokemon Move Database</h2></div>", unsafe_allow_html=True)
     
     col_search, col_filter = st.columns(2)
@@ -1235,6 +1304,10 @@ else:  # "Move Browser"
                 st.info("No move data available")
         else:
             st.error("Pokemon not found")
+
+# ==================== PAGE 6: POKECHAT ====================
+elif selected == "PokéChat":
+    render_pokechat_page()
 
 # ==================== FOOTER ====================
 st.markdown("---")

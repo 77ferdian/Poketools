@@ -9,6 +9,7 @@ Poketools is a premium, SaaS-grade Streamlit web application designed for compet
 *   **⚡ Type Calculator**: Instantly calculate defensive weaknesses and offensive coverage for single or dual-type Pokemon.
 *   **👥 Team Builder**: Construct a team of 6 Pokemon and analyze your team's overall stats, defensive vulnerabilities, and offensive coverage gaps using an interactive heatmap.
 *   **📖 Move Browser**: Browse, filter, and search through all Pokemon moves by type, category, or power.
+*   **🤖 PokéChat**: An AI-powered Pokemon expert chatbot using Google Gemini. Ask anything about Pokemon stats, type matchups, competitive strategies, lore, and trivia!
 
 ## Tech Stack 🛠️
 
