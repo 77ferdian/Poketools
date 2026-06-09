@@ -156,7 +156,7 @@ def chat_with_gemini(user_message: str, chat_history: list) -> str:
     
     try:
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model="gemini-2.5-flash",
             contents=contents,
             config={
                 "system_instruction": SYSTEM_PROMPT,
