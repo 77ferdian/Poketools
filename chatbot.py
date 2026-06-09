@@ -154,19 +154,27 @@ def chat_with_gemini(user_message: str, chat_history: list) -> str:
     
     contents.append({"role": "user", "parts": [{"text": enriched_message}]})
     
-    try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=contents,
-            config={
-                "system_instruction": SYSTEM_PROMPT,
-                "temperature": 0.8,
-                "max_output_tokens": 1024,
-            }
-        )
-        return response.text
-    except Exception as e:
-        return f"⚠️ Error saat menghubungi Gemini: {str(e)}"
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=contents,
+                config={
+                    "system_instruction": SYSTEM_PROMPT,
+                    "temperature": 0.8,
+                    "max_output_tokens": 1024,
+                }
+            )
+            return response.text
+        except Exception as e:
+            err_msg = str(e)
+            is_transient = any(code in err_msg for code in ["503", "429", "UNAVAILABLE", "RESOURCE_EXHAUSTED"])
+            if is_transient and attempt < max_retries - 1:
+                import time
+                time.sleep(2 * (attempt + 1))
+                continue
+            return f"⚠️ Error saat menghubungi Gemini: {err_msg}"
 
 
 def render_pokechat_page():
