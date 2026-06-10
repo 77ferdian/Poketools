@@ -28,13 +28,28 @@ Poketools is a premium, SaaS-grade Streamlit web application designed for compet
     cd Poketools
     ```
 
-2.  **Install dependencies:**
-    Ensure you have Python installed, then run:
-    ```bash
-    pip install streamlit pandas plotly requests
-    ```
+2.  **Activate Virtual Environment (.venv):**
+    Ensure you use the virtual environment so all dependencies (Streamlit, Plotly, etc.) are loaded correctly:
+    *   **Windows (PowerShell):**
+        ```powershell
+        .venv\Scripts\Activate.ps1
+        ```
+    *   **Windows (Command Prompt):**
+        ```cmd
+        .venv\Scripts\activate.bat
+        ```
+    *   **macOS / Linux:**
+        ```bash
+        source .venv/bin/activate
+        ```
 
-3.  **Run the application:**
+3.  **Install dependencies (if not already installed):**
+    ```bash
+    pip install -r requirements.txt
+    ```
+    *(Or install manually if requirements.txt is not present: `pip install streamlit pandas plotly requests google-genai`)*
+
+4.  **Run the application:**
     ```bash
     streamlit run app.py
     ```
